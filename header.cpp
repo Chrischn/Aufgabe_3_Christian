@@ -87,3 +87,18 @@ bool Medium::sigi(int sigi)
 	}
 
 }
+
+
+Medium::Medium(int i)																	//Ueberladener Medium-Konstruktor (Parametertyp int)
+{
+	cout << endl << "Signatur eingeben: ";
+	cin >> signatur;
+	while(cin.fail())
+	{
+		cin.clear();
+		cin.sync();
+		cout << endl << "Nur Zahlen eingeben!" << endl;
+		cout << endl << "Signatur eingeben: ";
+		cin >> signatur;				
+	}						
+}

@@ -1,10 +1,8 @@
 #include <iostream>
 #include <string>
-using namespace std;
 #include "header.h"
-#include "container.h"														
-
-
+#include "container.h"
+using namespace std;
 
 int main()
 {
@@ -12,102 +10,71 @@ int main()
 	Medium* ptrm = NULL;
 	Container* ptrc = new Container();
 	int sigi;
-	
+
 	while(modus != 'q')
 	{
 		cout << "Waehlen sie den gewuenschten Modus:" << endl << endl;
 		cout << "Moegliche Modi:" << endl;
 		cout << "m : neues Medium anlegen" << endl;
-		cout << "l : Mediumausgeben" << endl;
+		cout << "l : Medium ausgeben" << endl;
 		cout << "e : Medium entleihen" << endl;
 		cout << "r : Medium zurueckgeben" << endl;
+		cout << "d : Medium loeschen" << endl;
 		cout << "q : beenden" << endl << endl;
 		cout << "Modus: "; 
-		cin >> modus;													
+		cin >> modus;																		//Einlesen des gewuenschten Modus in Variable 'modus'
 		cout << endl;
 
 		switch(modus)
 		{
+////------------------------------------------------------------------------------------------------------------------------------------
 			case 'm':
 			ptrm = new Medium();
 			ptrc->add(ptrm);
-			break;
-
-			case 'l':
-			/*cout << endl << "Medienbestand:" << endl;
-			ptrc->tmp_element = ptrc->aktuelles_element;
-			if(ptrc->tmp_element->next == NULL)
-			{
-				ptrc->tmp_element->obj_adr->print();
+				ptrm = NULL;
 				break;
+////------------------------------------------------------------------------------------------------------------------------------------
+				case 'l':																	//Gebe kompletten Medienbestand auf Bildschirm aus
+				cout << "Medienbestand:" << endl;
+				ptrc->tmp_element = ptrc->erstes_element;
+				while(ptrc->tmp_element != NULL)
+				{
+					ptrc->tmp_element->obj_adr->print();
+					ptrc->tmp_element = ptrc->tmp_element->next;
 			}
-			while(ptrc->tmp_element->next != NULL)
-			{	
-				
-				ptrc->tmp_element->obj_adr->print();
-				ptrc->tmp_element = ptrc->tmp_element->next;
-				
-			}
-			ptrc->tmp_element = NULL;*/
-			break;
-
-			case 'e':
-		/*	if(ptrc->erstes_element == 0)
-			{
-				cout << endl << "Kein Element in der Liste vorhanden" << endl;
-			}
-			else
-			{
-				cout << endl << "Zu entleihende Signatur eingeben: ";
+				ptrc->tmp_element = NULL;
+////------------------------------------------------------------------------------------------------------------------------------------
+				case 'q':																	//Beende Programm
+				break;
+////------------------------------------------------------------------------------------------------------------------------------------
+				case 'd':
+				cout << endl << "Zu loeschende Mediensignatur eingeben: ";
 				cin >> sigi;
 				while(cin.fail())
-					{
-						cin.clear();
-						cin.sync();
-						cout << endl << "Nur Zahlen eingeben!" << endl;
-						cout << endl << "Signatur eingeben: ";
-						cin >> sigi;				
-					}
-					cout << endl;
-					ptrc->tmp_element = ptrc->erstes_element;
-					while(ptrc->tmp_element->next != NULL)
-					{
-						if(ptrc->tmp_element->obj_adr->sigi(sigi))
-						{
-							ptrc->tmp_element->obj_adr->entleihen();
-							break;
-						}
-						else
-						{	
-							if(ptrc->tmp_element->next == NULL || ptrc->tmp_element->obj_adr->sigi(sigi) == false)
-							{
-								cout << endl << "Kein Medium mit angegbenener Signatur gefunden!" << endl;
-							}
-							else
-							{
-							ptrc->tmp_element->next;
-							}
-						}
-					}
-			}*/
-
-			break;
-
-			case 'r':
-			break;
-
-			case 'q':
-			break;
-
-			default:
-			break;
-
-		}
-
-		modus = NULL; cin.sync();
+				{
+					cin.clear();
+					cin.sync();
+					cout << endl << "Nur Zahlen eingeben!" << endl;
+					cout << endl << "Signatur eingeben: ";
+					cin >> sigi;
+				}
+				cout << endl;
+				if(ptrc->remove(sigi))
+				{
+					cout << "Das Medium wurde geloescht!" << endl;
+				}
+				else
+				{
+					cout << "Kein Medium mit dieser Signatur gefunden!" << endl;
+				}
+				break;
+////------------------------------------------------------------------------------------------------------------------------------------
+				default:
+				cout << endl << "Nur gueltige Buchstaben verwenden!" << endl;				//Abfangen von fehlerhaften Benutzereingaben
+////------------------------------------------------------------------------------------------------------------------------------------
+			}
+		if(modus != 'q'){modus = NULL; cin.sync();}											//Setze modus Pointer zurueck
 		cout << endl;
-
 	}
-
 	return 0;
 }

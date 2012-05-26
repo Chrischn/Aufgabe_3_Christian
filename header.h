@@ -1,5 +1,6 @@
 #ifndef HEADER_H
 #define HEADER_H
+
 #include <string>
 using namespace std;
 
@@ -18,4 +19,4 @@ public:																//public fuer globalen Zugriff
 	void zurueck();
 	bool sigi(int sig);
 };
-#endif
+#endif	/*HEADER_H*/
